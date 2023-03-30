@@ -43,13 +43,14 @@ class Calculator {
     }
 
     appendNumber(number) {
-        if(this.currentOperand.includes(",") && number === ",") return;
-        if(this.currentOperand === "0"){
-            this.currentOperand = number.toString();
+        if (number === "," && this.currentOperand.includes(",")) return;
+        if (this.currentOperand === "0" && number !== ",") {
+          this.currentOperand = number.toString();
         } else {
-            this.currentOperand = this.currentOperand.toString() + number.toString();
+          this.currentOperand = this.currentOperand.toString() + number.toString();
+        }  
     }
-}
+      
 
     updateDisplay() {
         this.currentOperandText.innerText = this.currentOperand;
