@@ -43,7 +43,8 @@ class Calculator {
     }
 
     appendNumber(number) {
-        if(this.currentOperand === 0){
+        if(this.currentOperand.includes(",") && number === ",") return;
+        if(this.currentOperand === "0"){
             this.currentOperand = number.toString();
         } else {
             this.currentOperand = this.currentOperand.toString() + number.toString();
@@ -54,7 +55,7 @@ class Calculator {
         this.currentOperandText.innerText = this.currentOperand;
         this.previousOperandText.innerText = this.previousOperand;
         if(this.currentOperandText.innerText === "") {
-            this.currentOperandText.innerText = "0"
+            this.currentOperandText.innerText = "0";
         }
     }
 
@@ -64,7 +65,7 @@ class Calculator {
     }
 
     delete() {
-        if(this.currentOperand !== 0) {
+        if(this.currentOperand !== "0") {
             this.currentOperand = this.currentOperand.toString().slice(0, -1);
         }
     }
