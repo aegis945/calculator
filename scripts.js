@@ -33,7 +33,8 @@ deleteButton.addEventListener("click", () => {
 })
 
 equalsButton.addEventListener("click", () => {
-   
+   calculator.calculate();
+   calculator.updateDisplay();
 })
 
 class Calculator { 
@@ -45,8 +46,8 @@ class Calculator {
     }
 
     appendNumber(number) {
-        if (number === "," && this.currentOperand.includes(",")) return;
-        if (this.currentOperand === "0" && number !== ",") {
+        if (number === "." && this.currentOperand.includes(".")) return;
+        if (this.currentOperand === "0" && number !== ".") {
           this.currentOperand = number.toString();
         } else {
           this.currentOperand = this.currentOperand.toString() + number.toString();
@@ -74,9 +75,38 @@ class Calculator {
 
     chooseOperation(operation) {
         if(this.currentOperand === "") return
+        if(this.previousOperand !== "") {
+            this.calculate();
+        }
         this.operation = operation;
         this.previousOperand = this.currentOperand + " " + this.operation;
         this.currentOperand = "";
+    }
+
+    calculate() {
+        let calculationResult;
+        let previous = parseFloat(this.previousOperand);
+        let current = parseFloat(this.currentOperand);
+        if(isNaN(previous) || isNaN(current)) return;
+
+        switch(this.operation) {
+            case "÷":
+                calculationResult = previous / current;
+                break;
+            case "x":
+                calculationResult = previous * current;
+                break;
+            case "+":
+                calculationResult = previous + current;
+                break;
+            case "-":
+                calculationResult = previous - current;
+                break;  
+            default:
+                return;          
+        }
+        this.currentOperand = calculationResult;
+        this.previousOperand = "";
     }
 }
 
