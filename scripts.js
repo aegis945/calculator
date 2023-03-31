@@ -16,7 +16,9 @@ numberButtons.forEach(button => {
 
 operationButtons.forEach(button => {
     button.addEventListener("click", () => {
-        console.log(button.innerText);
+        calculator.chooseOperation(button.innerText);
+
+        calculator.updateDisplay(); 
     })
 })
 
@@ -34,7 +36,7 @@ equalsButton.addEventListener("click", () => {
    
 })
 
-class Calculator {
+class Calculator { 
     constructor(previousOperandText, currentOperandText) {
         this.previousOperandText = previousOperandText;
         this.currentOperandText = currentOperandText;
@@ -51,12 +53,11 @@ class Calculator {
         }  
     }
       
-
     updateDisplay() {
         this.currentOperandText.innerText = this.currentOperand;
         this.previousOperandText.innerText = this.previousOperand;
-        if(this.currentOperandText.innerText === "") {
-            this.currentOperandText.innerText = "0";
+        if(this.currentOperand === "" && this.previousOperand === "") {
+            this.currentOperand = "0";
         }
     }
 
@@ -69,6 +70,13 @@ class Calculator {
         if(this.currentOperand !== "0") {
             this.currentOperand = this.currentOperand.toString().slice(0, -1);
         }
+    }
+
+    chooseOperation(operation) {
+        if(this.currentOperand === "") return
+        this.operation = operation;
+        this.previousOperand = this.currentOperand + " " + this.operation;
+        this.currentOperand = "";
     }
 }
 
