@@ -46,11 +46,12 @@ class Calculator {
     }
 
     appendNumber(number) {
-        if (number === "." && this.currentOperand.includes(".")) return;
-        if (this.currentOperand === "0" && number !== ".") {
+        if(number === "." && this.currentOperand.includes(".")) return;
+        if(this.currentOperand.length === 22)  return; 
+        if(this.currentOperand === "0" && number !== ".") {
           this.currentOperand = number.toString();
-        } else {
-          this.currentOperand = this.currentOperand.toString() + number.toString();
+            } else {
+                this.currentOperand = this.currentOperand.toString() + number.toString();
         }  
     }
       
@@ -74,7 +75,7 @@ class Calculator {
     }
 
     chooseOperation(operation) {
-        if(this.currentOperand === "") return
+        if(this.currentOperand === "") return;
         if(this.previousOperand !== "") {
             this.calculate();
         }
