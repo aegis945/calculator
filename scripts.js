@@ -71,8 +71,12 @@ document.addEventListener("keydown", (number) => {
         calculator.delete();
         calculator.updateDisplay();
     }
-    if(button.key === "Enter") {
+    if(button.key === "Enter" || button.key === "=") {
         calculator.calculate();
+        calculator.updateDisplay();
+    }
+    if(button.key === 27 || button.key === "Escape") {
+        calculator.allClear();
         calculator.updateDisplay();
     }
   })
