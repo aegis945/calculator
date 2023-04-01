@@ -6,7 +6,7 @@ const allClearButton = document.querySelector("[data-all-clear]");
 const deleteButton = document.querySelector("[data-delete]");
 const equalsButton = document.querySelector("[data-equals]");
 
-
+/* Event listeners for div clicks */
 numberButtons.forEach(button => {
     button.addEventListener("click", () => {
         calculator.appendNumber(button.innerText);
@@ -17,7 +17,6 @@ numberButtons.forEach(button => {
 operationButtons.forEach(button => {
     button.addEventListener("click", () => {
         calculator.chooseOperation(button.innerText);
-
         calculator.updateDisplay(); 
     })
 })
@@ -36,6 +35,47 @@ equalsButton.addEventListener("click", () => {
    calculator.calculate();
    calculator.updateDisplay();
 })
+
+/* Event listeners for keyboard input */
+document.addEventListener("keydown", (number) => {
+    if(/^\d$|\./.test(number.key)) {
+       calculator.appendNumber(number.key); 
+       calculator.updateDisplay();
+    }
+});
+
+ document.addEventListener("keydown", (operation) => {
+    switch (operation.key) {
+      case "+":
+      case "-":
+        calculator.chooseOperation(operation.key);
+        calculator.updateDisplay();
+        break;
+      case "/":
+        calculator.chooseOperation("÷");
+        calculator.updateDisplay();
+        break;
+      case "x":
+      case "X":
+      case "*":
+        calculator.chooseOperation("x");
+        calculator.updateDisplay();
+        break;
+      default:
+        return;
+    }
+  });  
+
+  document.addEventListener("keydown", (button) => {
+    if(button.key === "Delete" || button.key === "Backspace") {
+        calculator.delete();
+        calculator.updateDisplay();
+    }
+    if(button.key === "Enter") {
+        calculator.calculate();
+        calculator.updateDisplay();
+    }
+  })
 
 class Calculator { 
     constructor(previousOperandText, currentOperandText) {
