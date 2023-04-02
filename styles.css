@@ -4,6 +4,10 @@ body {
     background-color: rgb(28, 28, 28);
 }
 
+html, body {
+    overflow: hidden;
+}
+  
 .calculator-grid {
     display: grid;
     justify-content: center;
@@ -17,6 +21,8 @@ body {
 button {
     font-size: 22px;
     border-color: rgb(80, 80, 80);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    color: rgb(28, 28, 28);
 }
 
 button:hover {
