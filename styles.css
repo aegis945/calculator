@@ -7,6 +7,12 @@ body {
 html, body {
     overflow: hidden;
 }
+
+html {
+    touch-action: manipulation;
+    zoom: 1.0;
+    max-zoom: 1.0;
+  }  
   
 .calculator-grid {
     display: grid;
